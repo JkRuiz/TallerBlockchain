@@ -19,24 +19,8 @@ class LogIn extends React.Component {
     return (
       <div className="limiter">
         <div className="container-login100">
-          <div className="wrap-login100">
-            <div className="login100-pic js-tilt" data-tilt>
-              <img src={logo} alt="IMG" />
-            </div>
 
             <div className="login100-form">
-              <span className="login100-form-title"></span>
-
-              <div className="wrap-input100 validate-input">
-                <select
-                  ref="userType"
-                  name="usertype"
-                  className="input100"
-                >
-                  <option value="natural">Persona Natural</option>
-                  <option value="empresa">Clinica</option>
-                </select>
-              </div>
 
               <div className="wrap-input100 validate-input">
                 <input
@@ -44,7 +28,6 @@ class LogIn extends React.Component {
                   type="text"
                   name="username"
                   placeholder="Email del usuario"
-                  onChange={this.handleUserName.bind(this)}
                 />
                 <span className="focus-input100"></span>
                 <span className="symbol-input100">
@@ -60,7 +43,6 @@ class LogIn extends React.Component {
                   type="password"
                   name="password"
                   placeholder="Contraseña"
-                  onChange={this.handleUserPassword.bind(this)}
                 />
                 <span className="focus-input100"></span>
                 <span className="symbol-input100">
@@ -76,9 +58,7 @@ class LogIn extends React.Component {
                   Iniciar
                 </button>
               </div>
-              <hr />
             </div>
-          </div>
         </div>
       </div>
     );

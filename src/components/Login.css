@@ -178,10 +178,10 @@
     align-items: center;
     padding: 15px;
     background: hsl(172, 45%, 50%);
-    background: -webkit-linear-gradient(-135deg, #308b7c, #4158d0);
-    background: -o-linear-gradient(-135deg, #308b7c, #4158d0);
-    background: -moz-linear-gradient(-135deg, #308b7c, #4158d0);
-    background: linear-gradient(-135deg, #308b7c, #4158d0);
+    background: -webkit-linear-gradient(-135deg, #30458b, #001fbd);
+    background: -o-linear-gradient(-135deg, #30458b, #001fbd);
+    background: -moz-linear-gradient(-135deg,  #30458b, #001fbd);
+    background: linear-gradient(-135deg,  #30458b, #001fbd);
   }
 
   .container-loginUser {
