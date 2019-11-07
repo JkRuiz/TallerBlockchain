@@ -1,18 +1,16 @@
-import { abiRSK } from "./abiRSK";
 import { abiEthereum } from "./abiEthereum";
 import Web3 from "web3";
 
-const addressRSK="0xa3929ec7d97e0a44a0313ccdc5157d650423dffd";
-const addressEtheruem="0x2D90FD7Cc087cbCe1a18Aa28ddD12cBA2836ECc1";
+const addressEtheruem="0x10740937ba7af6feef8be45a51cc6e0c0e8e20dd";
 
-var address = ""
 var abi = ""
+var address = ""
 
 class ContractManager {
   contract = null;
 
+  // Proceso para conectarse a la red e inicializar el contrato
   ensureContractInitialised = async () => {
-    // Maybe we've already intialised
     if (this.contract) return;
 
     if (
@@ -27,15 +25,9 @@ class ContractManager {
     this.web3 = new Web3(window.web3.currentProvider);
 
     const network = await this.web3.eth.net.getNetworkType();
-    if (network === "rinkeby") {
-      abi = abiEthereum
-      address = addressEtheruem
-      console.log("Publicando con la red de Ethereum")
-    } else if (network === "private"){
-      abi = abiRSK
-      address = addressRSK
-      console.log("Publicando con la red de RSK")
-    }
+    abi = abiEthereum
+    address = addressEtheruem
+    console.log("Publicando con la red de Ethereum")
 
     this.contract = new this.web3.eth.Contract(
       abi,
@@ -43,27 +35,27 @@ class ContractManager {
     );
   };
 
+  // Metodo para obtener el hash generado de la afiliacion
   getHash = async () => {
     await this.ensureContractInitialised();
     console.log("Calling the method...");
     return await this.contract.methods.getHash().call();
   };
 
-  certificationHash = async (afiliacion, id, descripcioncert, certificador, entidad) => {
+  // Metodo para generar el hash de la afiliación en la red blockchain
+  certificationHash = async (id, entidad) => {
     var transHash = "";
     await this.ensureContractInitialised();
 
     const from = await new Promise((resolve, reject) => {
-      // Specifically need to talk to Metamask's web3 here.
-      // It's an older version of web3 so it doesn't have the promise API.
+      // Se elige la primera cuenta de las que se tienen en metamask
       window.web3.eth.getAccounts((err, accounts) => {
         if (err) return reject(err);
         resolve(accounts[0]);
       });
     });
     console.log(from);
-    //string afiliacion, uint256 id, string descripcioncert, string certificador, string entidad)
-    await this.contract.methods.generateHashVal(afiliacion, id, descripcioncert, certificador, entidad).send({from}).on("transactionHash", function(hash) {
+    await this.contract.methods.generateHashVal(id, entidad).send({from}).on("transactionHash", function(hash) {
         console.log(hash);
         transHash = hash;
       });

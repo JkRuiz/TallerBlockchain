@@ -144,6 +144,7 @@ class AddCertificate extends React.Component {
             class="input100"
             name="identificacion"
             placeholder="Numero de identificación"
+            onChange={this.handleInputChange.bind(this)}
           />
           <span class="focus-input100"></span>
           <span class="symbol-input100">
@@ -156,6 +157,7 @@ class AddCertificate extends React.Component {
             class="input100"
             name="registradoPor"
             placeholder="Institucion a la cual esta afiliado"
+            onChange={this.handleInputChange.bind(this)}
           />
           <span class="focus-input100"></span>
           <span class="symbol-input100">

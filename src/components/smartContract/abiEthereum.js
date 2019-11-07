@@ -3,20 +3,8 @@ export const abiEthereum = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "afiliacion",
-				"type": "string"
-			},
-			{
 				"name": "id",
 				"type": "uint256"
-			},
-			{
-				"name": "descripcioncert",
-				"type": "string"
-			},
-			{
-				"name": "certificador",
-				"type": "string"
 			},
 			{
 				"name": "entidad",
@@ -37,20 +25,8 @@ export const abiEthereum = [
 	{
 		"inputs": [
 			{
-				"name": "afiliacion",
-				"type": "string"
-			},
-			{
 				"name": "id",
 				"type": "uint256"
-			},
-			{
-				"name": "descripcioncert",
-				"type": "string"
-			},
-			{
-				"name": "certificador",
-				"type": "string"
 			},
 			{
 				"name": "entidad",
