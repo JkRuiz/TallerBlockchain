@@ -12,13 +12,11 @@ class AddCertificate extends React.Component {
     super(props);
     this.state = {
       userId: "",
-      hash: "",
       registradoPor: "",
       generated: false,
       loading: false,
       hash: "",
       hashTransaction: "",
-      network: ""
     };
   }
 
@@ -38,28 +36,16 @@ class AddCertificate extends React.Component {
     ) {
       this.sendCertificate();
     } else {
-      console.log("ERROOOOR, ALGUN CAMPO ESTA VACIOOO MK!!");
+      console.log("Error, algun capo esta vacio");
     }
-  }
-
-  sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   sendCertificate = async () => {
     this.web3 = new Web3(window.web3.currentProvider);
-    var networkType = await this.web3.eth.net.getNetworkType();
-    if (networkType === "rinkeby") {
-      networkType = "Ethereum";
-    } else if (networkType === "private") {
-      networkType = "RSK";
-    }
-    this.setState({ network: networkType });
     var transactionHash = await ContractManager.certificationHash(
       this.state.userId,
       this.state.registradoPor
     );
-    console.log(transactionHash);
     this.setState({ hashTransaction: transactionHash });
     this.getHash();
   };
@@ -71,20 +57,10 @@ class AddCertificate extends React.Component {
   };
 
   aceptar(){
-    this.props.history.push(`/`);
+    this.setState({loading: false, generated: false});
   }
 
   render() {
-
-    if (this.state.network !== "" && this.state.loading) {
-      return (
-        <div className="login10-form">
-          <h3> Generando afiliacion en la red {this.state.network}</h3>
-          <Loader type="Rings" color="#00BFFF" height="150" width="150" />
-        </div>
-      );
-    }
-
     if (this.state.loading) {
       return (
         <div className="login10-form">
@@ -125,6 +101,7 @@ class AddCertificate extends React.Component {
                 class="login100-form-btn botonlogin"
                 name="funcion"
                 value="1"
+                onClick={this.aceptar.bind(this)}
               >
                 Aceptar
               </button>
